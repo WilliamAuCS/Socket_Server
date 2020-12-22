@@ -27,7 +27,7 @@ function createData() {
   return data;
 }
 
-graph;
+var graph;
 
 io.on("connection", (socket) => {
   console.log("a user has connected: ", socket.id);
