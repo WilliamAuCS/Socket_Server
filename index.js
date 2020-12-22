@@ -40,8 +40,7 @@ io.on("connection", (socket) => {
 
   function sendData() {
     let data = createData();
-    io.clients[socket.id].emit("graphData", data);
-    // io.sockets.emit("graphData", data);
+    io.sockets.emit("graphData", data);
     console.log(data.graph_data);
     console.log(data.time);
   }
