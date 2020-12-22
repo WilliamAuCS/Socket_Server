@@ -11,8 +11,8 @@ const server = app.listen(PORT, function () {
 // Socket setup
 const io = socket(server); //What server to work with
 
+current_time = 0;
 function createData() {
-  current_time = 0;
   const num_of_data = 10;
   const min = 0;
   const max = 5;
