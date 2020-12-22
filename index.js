@@ -18,7 +18,7 @@ function createData() {
   var data = [];
 
   for (let index = 0; index < num_of_data; index++) {
-    let temp = Math.random() * (max - min + 1) + min;
+    let temp = +(Math.random() * (max - min + 1) + min).toFixed(2);
     data.push(temp);
   }
   return data;
