@@ -30,7 +30,7 @@ function createData() {
 io.on("connection", (socket) => {
   console.log("a user has connected: ", socket.id);
 
-  setInterval(sendData, 2000);
+  setInterval(sendData, 500);
 });
 
 function sendData() {
