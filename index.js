@@ -44,7 +44,7 @@ io.on("connection", (socket) => {
 
   function sendData() {
     let data = createData();
-    io.sockets.emit("graphData", data);
+    socket.emit("graphData", data);
     console.log(data.graph_data);
     console.log(data.time);
   }
