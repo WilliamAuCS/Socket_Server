@@ -11,27 +11,24 @@ const server = app.listen(PORT, function () {
 // Socket setup
 const io = socket(server); //What server to work with
 
-current_time = 0;
+current_time = 1;
 function createData() {
-  const num_of_data = 10;
   const min = 0;
   const max = 5;
-  var data = {
-    graph_data: [],
-    time: [],
+  let data = {
+    graph_data: Number,
+    time: Number,
   };
 
-  for (let index = 0; index < num_of_data; index++) {
-    let temp = +(Math.random() * (max - min + 1) + min).toFixed(2);
-    data.graph_data.push(temp);
-    data.time.push(current_time);
-    ++current_time;
-  }
+  let temp = +(Math.random() * (max - min + 1) + min).toFixed(2);
+  data.graph_data = temp;
+  data.time = current_time;
+  ++current_time;
   return data;
 }
 
 io.on("connection", (socket) => {
-  console.log("a user has connected");
+  console.log("a user has connected: ", socket.id);
 
   setInterval(sendData, 5000);
 });
