@@ -29,4 +29,5 @@ io.on("connection", (socket) => {
 
   let data = createData();
   io.sockets.emit("graphData", data);
+  console.log(data);
 });
