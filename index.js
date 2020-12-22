@@ -27,7 +27,11 @@ function createData() {
 io.on("connection", (socket) => {
   console.log("a user has connected");
 
+  setInterval(sendData, 5000);
+});
+
+function sendData() {
   let data = createData();
   io.sockets.emit("graphData", data);
   console.log(data);
-});
+}
