@@ -27,17 +27,19 @@ function createData() {
   return data;
 }
 
+graph;
+
 io.on("connection", (socket) => {
   console.log("a user has connected: ", socket.id);
 
   socket.on("startGraph", () => {
     console.log("Starting graph");
-    setInterval(sendData, 250);
+    graph = setInterval(sendData, 250);
   });
 
   socket.on("stopGraph", () => {
     console.log("Stopping graph");
-    clearInterval(sendData);
+    clearInterval(graph);
   });
 
   function sendData() {
