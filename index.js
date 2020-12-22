@@ -12,14 +12,20 @@ const server = app.listen(PORT, function () {
 const io = socket(server); //What server to work with
 
 function createData() {
+  current_time = 0;
   const num_of_data = 10;
   const min = 0;
   const max = 5;
-  var data = [];
+  var data = {
+    graph_data: [],
+    time: [],
+  };
 
   for (let index = 0; index < num_of_data; index++) {
     let temp = +(Math.random() * (max - min + 1) + min).toFixed(2);
-    data.push(temp);
+    data.graph_data.push(temp);
+    data.time.push(current_time);
+    ++current_time;
   }
   return data;
 }
@@ -33,5 +39,6 @@ io.on("connection", (socket) => {
 function sendData() {
   let data = createData();
   io.sockets.emit("graphData", data);
-  console.log(data);
+  console.log(data.graph_data);
+  console.log(data.time);
 }
