@@ -30,11 +30,11 @@ function createData() {
 io.on("connection", (socket) => {
   console.log("a user has connected: ", socket.id);
 
-  socket.on("startGraph", (data) => {
+  socket.on("startGraph", () => {
     setInterval(sendData, 250);
   });
 
-  socket.on("stopGraph", (data) => {
+  socket.on("stopGraph", () => {
     clearInterval(sendData);
   });
 
