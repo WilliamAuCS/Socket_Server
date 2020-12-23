@@ -53,10 +53,10 @@ io.on("connection", (socket) => {
 
   socket.on("graphOptions", (data) => {
     console.log(data.dataset);
-    console.log(data.graphType);
+    console.log(data.graphingType);
 
     clientData[socket.id].dataset = data.dataset;
-    clientData[socket.id].graphType = data.graphType;
+    clientData[socket.id].graphingType = data.graphType;
   });
 
   socket.on("startGraph", () => {
