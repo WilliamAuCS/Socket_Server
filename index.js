@@ -80,7 +80,7 @@ io.on("connection", (socket) => {
     }
 
     socket.emit("graphData", data);
-    console.log(data.graph_data);
-    console.log(data.time);
+    console.log("Data: ", data.graph_data);
+    console.log("Time: ", data.time);
   }
 });
