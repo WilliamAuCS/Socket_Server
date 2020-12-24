@@ -48,7 +48,7 @@ io.on("connection", (socket) => {
   clientData[socket.id] = {
     currentIndex: 0,
     dataset: "random",
-    graphType: "normal",
+    graphingType: "normal",
     isOn: false,
   };
 
