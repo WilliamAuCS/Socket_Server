@@ -78,6 +78,11 @@ io.on("connection", (socket) => {
     console.log(clientData);
   });
 
+  socket.on("disconnect", (reason) => {
+    clientData[socket.id].isOn = false;
+    clearInterval(graph);
+  });
+
   function sendData(socketID) {
     if (clientData[socketID].dataset === "random") {
       var data = createData(0, socketID);
