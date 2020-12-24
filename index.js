@@ -50,6 +50,7 @@ io.on("connection", (socket) => {
     dataset: "random",
     graphingType: "normal",
     isOn: false,
+    socketCounter: 0,
   };
 
   socket.on("graphOptions", (data) => {
@@ -75,10 +76,14 @@ io.on("connection", (socket) => {
 
   socket.on("stopGraph", () => {
     console.log("Stopping graph");
-    clientData[socket.id].isOn = false;
-    clearInterval(graph);
+    stopGraph();
 
     console.log(clientData);
+  });
+
+  // Renews data stream timer
+  socket.on("renewChannel", () => {
+    clientData[socket.id].socketCounter = 0;
   });
 
   socket.on("disconnect", (reason) => {
@@ -87,14 +92,23 @@ io.on("connection", (socket) => {
   });
 
   function sendData(socketID) {
+    if (clientData[socketID].socketCounter >= 10) {
+      stopGraph();
+    }
     if (clientData[socketID].dataset === "random") {
       var data = createData(0, socketID);
     } else if (clientData[socketID].dataset === "dataset1") {
       var data = createData(1, socketID);
     }
 
+    ++clientData[socketID].socketCounter;
     socket.emit("graphData", data);
     console.log("Data: ", data.graph_data);
     console.log("Time: ", data.time);
+  }
+
+  function stopGraph() {
+    clearInterval(graph);
+    clientData[socket.id].isOn = false;
   }
 });
