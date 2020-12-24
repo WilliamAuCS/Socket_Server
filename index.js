@@ -11,9 +11,6 @@ const server = app.listen(PORT, function () {
 // Socket setup
 const io = socket(server); //What server to work with
 
-// Used by all sockets connected.
-// Can be fixed in future so each socket gets its own respective current_time
-current_time = 1;
 function createData(d, socketID) {
   let data = {
     graph_data: Number,
@@ -33,8 +30,8 @@ function createData(d, socketID) {
   }
 
   data.graph_data = temp;
-  data.time = current_time;
-  ++current_time;
+  data.time = clientData[socketID].currentIndex;
+  ++clientData[socketID].currentIndex;
   return data;
 }
 
