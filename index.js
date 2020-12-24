@@ -26,9 +26,8 @@ function createData(d, socketID) {
       clientData[socketID].currentIndex = 0;
     }
     temp = dataset1[clientData[socketID].currentIndex];
-    ++clientData[socketID].currentIndex;
   }
-
+  ++clientData[socketID].currentIndex;
   data.graph_data = temp;
   data.time = clientData[socketID].currentIndex;
   return data;
