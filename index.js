@@ -92,6 +92,7 @@ io.on("connection", (socket) => {
   });
 
   function sendData(socketID) {
+    console.log(clientData[socketID].socketCounter);
     if (clientData[socketID].socketCounter >= 10) {
       stopGraph();
     }
