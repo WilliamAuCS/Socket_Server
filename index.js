@@ -36,7 +36,7 @@ function createData(d, socketID) {
 
 var clientData = {};
 
-const dataset1 = [3, 3, 3, 4, 3, 2, 7, 1, 3, 3, 4, 3, 3, 3];
+const dataset1 = [3, 3, 4, 3, 2, 7, 1, 3, 3, 4, 3, 3];
 
 var graph;
 
