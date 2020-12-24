@@ -27,9 +27,10 @@ function createData(d, socketID) {
     }
     temp = dataset1[clientData[socketID].currentIndex];
   }
+  ++clientData[socketID].totalIndex;
   ++clientData[socketID].currentIndex;
+  data.time = clientData[socketID].totalIndex;
   data.graph_data = temp;
-  data.time = clientData[socketID].currentIndex;
   return data;
 }
 
@@ -45,6 +46,7 @@ io.on("connection", (socket) => {
   // Default client data
   clientData[socket.id] = {
     currentIndex: 0,
+    totalIndex: 0,
     dataset: "random",
     graphingType: "normal",
     isOn: false,
@@ -57,6 +59,7 @@ io.on("connection", (socket) => {
     clientData[socket.id].dataset = data.dataset;
     clientData[socket.id].graphingType = data.graphingType;
     clientData[socket.id].currentIndex = 0;
+    clientData[socket.id].totalIndex = 0;
   });
 
   socket.on("startGraph", () => {
