@@ -25,6 +25,9 @@ function createData(d, socketID) {
     const max = 5;
     temp = +(Math.random() * (max - min + 1) + min).toFixed(2);
   } else if (d === 1) {
+    if (clientData[socketID].currentIndex >= dataset1.length) {
+      clientData[socketID].currentIndex = 0;
+    }
     temp = dataset1[clientData[socketID].currentIndex];
     ++clientData[socketID].currentIndex;
   }
