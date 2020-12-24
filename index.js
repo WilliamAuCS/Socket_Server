@@ -49,6 +49,7 @@ io.on("connection", (socket) => {
     currentIndex: 0,
     dataset: "random",
     graphType: "normal",
+    isOn: false,
   };
 
   socket.on("graphOptions", (data) => {
@@ -61,7 +62,8 @@ io.on("connection", (socket) => {
   });
 
   socket.on("startGraph", () => {
-    if (clientData[socket.id] === undefined) {
+    // Only allows user to start graph if it is not currently active
+    if (clientData[socket.id].isOn === false) {
       console.log("Starting graph");
       graph = setInterval(() => {
         sendData(socket.id);
@@ -72,6 +74,8 @@ io.on("connection", (socket) => {
   socket.on("stopGraph", () => {
     console.log("Stopping graph");
     clearInterval(graph);
+
+    console.log(clientData);
   });
 
   function sendData(socketID) {
