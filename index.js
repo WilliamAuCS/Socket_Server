@@ -61,10 +61,12 @@ io.on("connection", (socket) => {
   });
 
   socket.on("startGraph", () => {
-    console.log("Starting graph");
-    graph = setInterval(() => {
-      sendData(socket.id);
-    }, 250);
+    if (clientData[socket.id] === undefined) {
+      console.log("Starting graph");
+      graph = setInterval(() => {
+        sendData(socket.id);
+      }, 250);
+    }
   });
 
   socket.on("stopGraph", () => {
