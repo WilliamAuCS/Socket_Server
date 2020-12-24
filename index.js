@@ -69,7 +69,7 @@ io.on("connection", (socket) => {
       clientData[socket.id].isOn = true;
       graph = setInterval(() => {
         sendData(socket.id);
-      }, 150);
+      }, 100);
     }
   });
 
