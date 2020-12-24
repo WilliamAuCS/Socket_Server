@@ -57,7 +57,7 @@ io.on("connection", (socket) => {
     console.log(data.graphingType);
 
     clientData[socket.id].dataset = data.dataset;
-    clientData[socket.id].graphingType = data.graphType;
+    clientData[socket.id].graphingType = data.graphingType;
     clientData[socket.id].currentIndex = 0;
   });
 
