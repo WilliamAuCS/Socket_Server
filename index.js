@@ -65,6 +65,7 @@ io.on("connection", (socket) => {
     // Only allows user to start graph if it is not currently active
     if (clientData[socket.id].isOn === false) {
       console.log("Starting graph");
+      clientData[socket.id].isOn = true;
       graph = setInterval(() => {
         sendData(socket.id);
       }, 250);
@@ -73,6 +74,7 @@ io.on("connection", (socket) => {
 
   socket.on("stopGraph", () => {
     console.log("Stopping graph");
+    clientData[socket.id].isOn = false;
     clearInterval(graph);
 
     console.log(clientData);
