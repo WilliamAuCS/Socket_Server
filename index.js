@@ -15,6 +15,7 @@ function createData(d, socketID) {
   let data = {
     graph_data: Number,
     time: Number,
+    compare: Array,
   };
   let temp;
   if (d === 0) {
@@ -83,6 +84,7 @@ io.on("connection", (socket) => {
     graphingType: "normal",
     isOn: false,
     socketCounter: 0,
+    firstSend: true,
   };
 
   socket.on("graphOptions", (data) => {
@@ -136,6 +138,13 @@ io.on("connection", (socket) => {
       var data = createData(2, socketID);
     }
 
+    if ((clientData[socketID].firstSend = true)) {
+      data.compare = dataset2;
+      clientData[socketID].firstSend = false;
+    } else {
+      data.compare = [];
+    }
+
     ++clientData[socketID].socketCounter;
     socket.emit("graphData", data);
     console.log("Data: ", data.graph_data);
@@ -144,6 +153,7 @@ io.on("connection", (socket) => {
 
   function stopGraph() {
     clearInterval(graph);
+    clientData[socket.id].firstSend = true;
     clientData[socket.id].isOn = false;
   }
 });
