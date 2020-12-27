@@ -32,11 +32,7 @@ function createData(d, socketID) {
     }
     temp = dataset2[clientData[socketID].currentIndex];
   }
-  if (clientData[socketID].dataset === "dataset2") {
-    clientData[socketID].totalIndex += 0.03;
-  } else {
-    ++clientData[socketID].totalIndex;
-  }
+  ++clientData[socketID].totalIndex;
   ++clientData[socketID].currentIndex;
   data.time = clientData[socketID].totalIndex;
   data.graph_data = temp;
