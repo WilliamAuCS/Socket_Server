@@ -32,6 +32,11 @@ function createData(d, socketID) {
       clientData[socketID].currentIndex = 0;
     }
     temp = dataset2[clientData[socketID].currentIndex];
+  } else if (d === 3) {
+    if (clientData[socketID].currentIndex >= dataset3.length) {
+      clientData[socketID].currentIndex = 0;
+    }
+    temp = dataset3[clientData[socketID].currentIndex];
   }
   ++clientData[socketID].totalIndex;
   ++clientData[socketID].currentIndex;
@@ -44,6 +49,60 @@ var clientData = {};
 
 const dataset1 = [3, 3, 4, 3, 2, 7, 1, 3, 3, 4, 3, 3];
 const dataset2 = [
+  -0.13,
+  -0.18,
+  -0.13,
+  -0.25,
+  -0.26,
+  -0.5,
+  0.89,
+  -0.43,
+  -0.34,
+  -0.33,
+  -0.34,
+  -0.33,
+  -0.34,
+  -0.33,
+  -0.34,
+  -0.33,
+  -0.37,
+  -0.33,
+  -0.32,
+  -0.31,
+  -0.2,
+  -0.23,
+  -0.24,
+  -0.25,
+  -0.24,
+];
+const dataset3 = [
+  -0.13,
+  -0.18,
+  -0.13,
+  -0.25,
+  -0.26,
+  -0.5,
+  -0.43,
+  -0.43,
+  -0.34,
+  -0.33,
+  -0.34,
+  -0.33,
+  -0.34,
+  -0.33,
+  -0.34,
+  -0.33,
+  -0.37,
+  -0.33,
+  -0.32,
+  -0.31,
+  -0.2,
+  -0.23,
+  -0.24,
+  -0.25,
+  -0.24,
+];
+const dataset3_compare = [
   -0.13,
   -0.18,
   -0.13,
@@ -136,10 +195,16 @@ io.on("connection", (socket) => {
       var data = createData(1, socketID);
     } else if (clientData[socketID].dataset === "dataset2") {
       var data = createData(2, socketID);
+    } else if (clientData[socketID].dataset === "dataset3") {
+      var data = createData(3, socketID);
     }
 
-    if ((clientData[socketID].firstSend = true)) {
-      data.compare = dataset2;
+    // Currently only works with dataset3
+    if (
+      (clientData[socketID].firstSend =
+        true && clientData[socketID].graphingType === "compare")
+    ) {
+      data.compare = dataset3_compare;
       clientData[socketID].firstSend = false;
     } else {
       data.compare = [];
