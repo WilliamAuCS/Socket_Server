@@ -15,9 +15,10 @@ function createData(d, socketID) {
   let data = {
     graph_data: Number,
     time: Number,
-    compare: Array,
+    compare: Number,
   };
   let temp;
+  let tempCompare;
   if (d === 0) {
     const min = 0;
     const max = 5;
@@ -35,6 +36,12 @@ function createData(d, socketID) {
   } else if (d === 3) {
     if (clientData[socketID].currentIndex >= dataset3.length) {
       clientData[socketID].currentIndex = 0;
+    }
+    if (clientData[socketID].graphingType === "compare") {
+      tempCompare = dataset3_compare[clientData[socketID].currentIndex];
+      data.compare = tempCompare;
+    } else {
+      data.compare = 0;
     }
     temp = dataset3[clientData[socketID].currentIndex];
   }
@@ -143,7 +150,6 @@ io.on("connection", (socket) => {
     graphingType: "normal",
     isOn: false,
     socketCounter: 0,
-    firstSend: true,
   };
 
   socket.on("graphOptions", (data) => {
@@ -197,17 +203,6 @@ io.on("connection", (socket) => {
       var data = createData(2, socketID);
     } else if (clientData[socketID].dataset === "dataset3") {
       var data = createData(3, socketID);
-    }
-
-    // Currently only works with dataset3
-    if (
-      (clientData[socketID].firstSend =
-        true && clientData[socketID].graphingType === "compare")
-    ) {
-      data.compare = dataset3_compare;
-      clientData[socketID].firstSend = false;
-    } else {
-      data.compare = [];
     }
 
     ++clientData[socketID].socketCounter;
