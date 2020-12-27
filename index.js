@@ -116,7 +116,7 @@ const dataset3_compare = [
   -0.25,
   -0.26,
   -0.5,
-  0.89,
+  -0.43,
   -0.43,
   -0.34,
   -0.33,
@@ -130,7 +130,7 @@ const dataset3_compare = [
   -0.33,
   -0.32,
   -0.31,
-  -0.2,
+  -0.6,
   -0.23,
   -0.24,
   -0.25,
@@ -153,9 +153,6 @@ io.on("connection", (socket) => {
   };
 
   socket.on("graphOptions", (data) => {
-    console.log(data.dataset);
-    console.log(data.graphingType);
-
     clientData[socket.id].dataset = data.dataset;
     clientData[socket.id].graphingType = data.graphingType;
     clientData[socket.id].currentIndex = 0;
@@ -207,9 +204,8 @@ io.on("connection", (socket) => {
 
     ++clientData[socketID].socketCounter;
     socket.emit("graphData", data);
-    // console.log("Data: ", data.graph_data);
-    // console.log("Time: ", data.time);
-    console.log("Compare ", data.compare);
+    console.log("Data: ", data.graph_data);
+    console.log("Time: ", data.time);
   }
 
   function stopGraph() {
